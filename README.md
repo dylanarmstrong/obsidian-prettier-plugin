@@ -24,4 +24,4 @@ Significant inspiration taken from [alexgavrusev/obsidian-format-with-prettier](
 
 # License
 
-BSD Zero Clause License, for more details see [License](./License.md)
+MIT License, for more details see [License](./LICENSE)
