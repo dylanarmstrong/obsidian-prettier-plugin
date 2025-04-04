@@ -24,6 +24,10 @@ jobs:
           pnpm install
           pnpm run build
 
+      - name: Zip
+        run: |
+          zip obsidian-prettier-plugin.zip main.js manifest.json styles.css
+
       - name: Create release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -33,4 +37,4 @@ jobs:
           gh release create "$tag" \
             --title="$tag" \
             --draft \
-            main.js manifest.json styles.css
+            obsidian-prettier-plugin.zip main.js manifest.json styles.css
