@@ -1,8 +1,11 @@
-/*
+.prettier-plugin-hr {
+  border-width: 1px;
+  margin: 0;
+}
 
-This CSS file will be included with your plugin, and
-available in the app when your plugin is enabled.
-
-If your plugin does not need CSS, delete this file.
-
-*/
+.prettier-plugin-settings-description {
+  font-size: var(--font-small);
+  font-weight: var(--font-bold);
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
