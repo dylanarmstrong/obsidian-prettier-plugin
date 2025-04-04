@@ -1,11 +1,11 @@
 {
-  "id": "obsidian-prettier-plugin",
-  "name": "Format with Prettier",
-  "version": "0.1.3",
-  "minAppVersion": "0.15.0",
-  "description": "Format files with prettier",
   "author": "Dylan Armstrong <dylan@dylan.is>",
-  "authorUrl": "https://github.com/dylanarmstrong/obsidian-prettier-plugin",
+  "authorUrl": "https://dylan.is/",
+  "description": "Format files with Prettier using built-in Obsidian settings for configuration.",
   "fundingUrl": "",
-  "isDesktopOnly": false
+  "id": "prettier-format",
+  "isDesktopOnly": false,
+  "minAppVersion": "0.15.0",
+  "name": "Format Automatically with Prettier",
+  "version": "0.1.4"
 }
