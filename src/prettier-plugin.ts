@@ -17,6 +17,7 @@ const DEFAULT_SETTINGS: PrettierPluginSettings = {
   useTabs: true,
 };
 
+// Taken from https://github.com/alexgavrusev/obsidian-format-with-prettier/blob/master/src/cursor-position-utils.ts
 // If the cursor is on line i, on character j, the offset
 // is j plus sum of lengths (incl. the \n at the end) of lines 0..(i - 1)
 const toOffset = (position: EditorPosition, text: string): number =>
