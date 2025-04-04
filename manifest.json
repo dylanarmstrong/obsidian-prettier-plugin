@@ -1,11 +1,11 @@
 {
   "author": "Dylan Armstrong <dylan@dylan.is>",
   "authorUrl": "https://dylan.is/",
-  "description": "Format files with Prettier using built-in Obsidian settings for configuration.",
+  "description": "Format files with Prettier using built-in settings for configuration.",
   "fundingUrl": "",
   "id": "prettier-format",
   "isDesktopOnly": false,
   "minAppVersion": "0.15.0",
   "name": "Format Automatically with Prettier",
-  "version": "0.1.4"
+  "version": "0.1.5"
 }
