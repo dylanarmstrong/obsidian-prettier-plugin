@@ -1,5 +1,5 @@
 {
-  "author": "Dylan Armstrong <dylan@dylan.is>",
+  "author": "Dylan Armstrong",
   "authorUrl": "https://dylan.is/",
   "description": "Format files with Prettier using built-in settings for configuration.",
   "fundingUrl": "",
@@ -7,5 +7,5 @@
   "isDesktopOnly": false,
   "minAppVersion": "0.15.0",
   "name": "Format Automatically with Prettier",
-  "version": "0.1.5"
+  "version": "0.1.6"
 }
