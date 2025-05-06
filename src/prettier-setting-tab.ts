@@ -16,7 +16,7 @@ export default class PrettierSettingTab extends PluginSettingTab {
     containerEl.empty();
 
     new Setting(containerEl)
-      .setName('Format on Save')
+      .setName('Format on save')
       .setDesc('Format file automatically when you save')
       .addToggle((component) =>
         component
