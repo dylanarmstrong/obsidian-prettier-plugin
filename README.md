@@ -1,6 +1,6 @@
 # Obsidian Prettier Plugin
 
-This is a formatting plugin for Obsidian (https://obsidian.md).
+This is a formatting plugin for [Obsidian](https://obsidian.md).
 
 It uses the built-in settings for tabs and tab spacing so it doesn't require configuration.
 
@@ -10,7 +10,9 @@ Unlike [alexgavrusev/obsidian-format-with-prettier](https://github.com/alexgavru
 
 # Installation
 
-Unzip the [latest release](https://github.com/dylanarmstrong/obsidian-prettier-plugin/releases/latest) into `.obsidian/plugins` folder of your vault.
+Install from community plugins.
+
+_Or_ unzip the [latest release](https://github.com/dylanarmstrong/obsidian-prettier-plugin/releases/latest) into `.obsidian/plugins` folder of your vault.
 
 # Usage
 
@@ -24,7 +26,7 @@ This plugin only provides two options to prettier, namely tabWidth and useTabs. 
 
 # Credits
 
-Significant inspiration taken from [alexgavrusev/obsidian-format-with-prettier](https://github.com/alexgavrusev/obsidian-format-with-prettier).
+Significant inspiration taken from [alexgavrusev/obsidian-format-with-prettier](https://github.com/alexgavrusev/obsidian-format-with-prettier) and [platers/obsidian-linter](https://github.com/platers/obsidian-linter).
 
 # License
 
