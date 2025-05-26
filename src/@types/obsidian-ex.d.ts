@@ -1,4 +1,5 @@
 import 'obsidian';
+import { EditorView } from '@codemirror/view';
 
 declare module 'obsidian' {
   interface App {
@@ -10,6 +11,10 @@ declare module 'obsidian' {
         };
       };
     };
+  }
+
+  interface Editor {
+    cm?: EditorView;
   }
 
   interface Vault {

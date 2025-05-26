@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      diff-match-patch:
+        specifier: ^1.0.5
+        version: 1.0.5
       obsidian:
         specifier: ^1.8.7
         version: 1.8.7(@codemirror/state@6.5.2)(@codemirror/view@6.36.8)
@@ -15,12 +18,18 @@ importers:
         specifier: ^3.5.3
         version: 3.5.3
     devDependencies:
+      '@codemirror/view':
+        specifier: ^6.36.8
+        version: 6.36.8
       '@dylanarmstrong/eslint-config':
         specifier: ^0.8.0
         version: 0.8.0(eslint@9.27.0)
       '@eslint/js':
         specifier: ^9.27.0
         version: 9.27.0
+      '@types/diff-match-patch':
+        specifier: ^1.0.36
+        version: 1.0.36
       '@types/node':
         specifier: ^22.15.21
         version: 22.15.21
@@ -301,6 +310,9 @@ packages:
   '@types/codemirror@5.60.8':
     resolution: {integrity: sha512-VjFgDF/eB+Aklcy15TtOTLQeMjTo07k7KAjql8OK5Dirr7a6sJY4T1uVBDuTVG9VEmn1uUsohOpYnVfgC6/jyw==}
 
+  '@types/diff-match-patch@1.0.36':
+    resolution: {integrity: sha512-xFdR6tkm0MWvBfO8xXCSsinYxHcqkQUlcHeSpMC2ukzOb6lwQAfDmW+Qt0AvlGd8HpsS28qKsB+oPeJn9I39jg==}
+
   '@types/estree@1.0.7':
     resolution: {integrity: sha512-w28IoSUCJpidD/TGviZwwMJckNESJZXFu7NBZ5YJ4mEUnNraUn9Pm8HSZm/jDF1pDWYKspWE7oVphigUPRakIQ==}
 
@@ -453,6 +465,9 @@ packages:
 
   deep-is@0.1.4:
     resolution: {integrity: sha512-oIPzksmTg4/MriiaYGO+okXDT7ztn/w3Eptv/+gSIdMdKsJo0u4CfYNFJPy+4SKMuCqGw2wxnA+URMg3t8a/bQ==}
+
+  diff-match-patch@1.0.5:
+    resolution: {integrity: sha512-IayShXAgj/QMXgB0IWmKx+rOPuGMhqm5w6jvFxmVenXKIzRqTAAsbBPT3kWQeGANj3jGgvcvv4yK6SxqYmikgw==}
 
   electron-to-chromium@1.5.157:
     resolution: {integrity: sha512-/0ybgsQd1muo8QlnuTpKwtl0oX5YMlUGbm8xyqgDU00motRkKFFbUJySAQBWcY79rVqNLWIWa87BGVGClwAB2w==}
@@ -1036,6 +1051,8 @@ snapshots:
     dependencies:
       '@types/tern': 0.23.9
 
+  '@types/diff-match-patch@1.0.36': {}
+
   '@types/estree@1.0.7': {}
 
   '@types/json-schema@7.0.15': {}
@@ -1208,6 +1225,8 @@ snapshots:
       ms: 2.1.3
 
   deep-is@0.1.4: {}
+
+  diff-match-patch@1.0.5: {}
 
   electron-to-chromium@1.5.157: {}
 

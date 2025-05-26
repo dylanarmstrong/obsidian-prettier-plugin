@@ -1,13 +1,16 @@
 {
   "author": "Dylan Armstrong<dylan@dylan.is>",
   "dependencies": {
+    "diff-match-patch": "^1.0.5",
     "obsidian": "^1.8.7",
     "prettier": "^3.5.3"
   },
   "description": "This is a formatting plugin for Obsidian (https://obsidian.md)",
   "devDependencies": {
+    "@codemirror/view": "^6.36.8",
     "@dylanarmstrong/eslint-config": "^0.8.0",
     "@eslint/js": "^9.27.0",
+    "@types/diff-match-patch": "^1.0.36",
     "@types/node": "^22.15.21",
     "builtin-modules": "5.0.0",
     "esbuild": "0.25.4",

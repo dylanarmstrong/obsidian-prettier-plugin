@@ -1,3 +1,4 @@
+import DiffMatchPatch from 'diff-match-patch';
 import { EditorPosition, Plugin } from 'obsidian';
 
 import * as markdownPlugin from 'prettier/plugins/markdown';
@@ -17,22 +18,11 @@ const DEFAULT_SETTINGS: PrettierPluginSettings = {
   useTabs: true,
 };
 
-// Taken from https://github.com/alexgavrusev/obsidian-format-with-prettier/blob/master/src/cursor-position-utils.ts
-// If the cursor is on line i, on character j, the offset
-// is j plus sum of lengths (incl. the \n at the end) of lines 0..(i - 1)
-const toOffset = (position: EditorPosition, text: string): number =>
-  text
-    .split('\n')
-    .slice(0, position.line)
-    .reduce((accumulator, line) => accumulator + line.length + 1, position.ch);
-
-const fromOffset = (offset: number, text: string): EditorPosition => {
-  const textUpToOffset = text.slice(0, offset);
-  const newLines = textUpToOffset.split('\n');
-
+const getPosition = (text: string): EditorPosition => {
+  const lines = text.split('\n');
   return {
-    ch: newLines?.at(-1)?.length || 0,
-    line: newLines.length - 1,
+    ch: lines.at(-1)?.length ?? 0,
+    line: lines.length - 1,
   };
 };
 
@@ -43,28 +33,64 @@ export default class PrettierPlugin extends Plugin {
 
   private async format() {
     const editor = this.app.workspace.activeEditor?.editor;
-    if (!editor) {
+    if (!editor || !editor.cm) {
       return;
     }
 
     const file = this.app.workspace.getActiveFile();
     const text = editor.getValue();
     if (text && file) {
-      const position = editor.getCursor();
-      const cursorOffset = toOffset(position, text);
+      const formattedText = await prettier.format(text, {
+        embeddedLanguageFormatting: 'auto',
+        filepath: file.path,
+        parser: 'markdown',
+        plugins: [markdownPlugin],
+        tabWidth: this.settings.tabWidth,
+        useTabs: this.settings.useTabs,
+      });
 
-      const { cursorOffset: formattedCursorOffset, formatted: formattedText } =
-        await prettier.formatWithCursor(text, {
-          cursorOffset,
-          filepath: file.path,
-          parser: 'markdown',
-          plugins: [markdownPlugin],
-          tabWidth: this.settings.tabWidth,
-          useTabs: this.settings.useTabs,
-        });
+      // Switched to using DiffMatchPatch after I saw it here:
+      // https://github.com/platers/obsidian-linter
+      // And this style of updating the editor stops my cursor from jumping
+      // around. Also, it keeps sections toggled if I've closed them.
 
-      editor.setValue(formattedText);
-      editor.setCursor(fromOffset(formattedCursorOffset, formattedText));
+      // eslint-disable-next-line new-cap
+      const dmp = new DiffMatchPatch.diff_match_patch();
+      const changes = dmp.diff_main(text, formattedText);
+
+      let currentText = '';
+      for (const change of changes) {
+        const [type, value] = change;
+
+        if (type === DiffMatchPatch.DIFF_INSERT) {
+          editor.cm.dispatch({
+            changes: [
+              {
+                from: editor.posToOffset(getPosition(currentText)),
+                insert: value,
+              },
+            ],
+            filter: false,
+          });
+          currentText += value;
+        } else if (type === DiffMatchPatch.DIFF_DELETE) {
+          const start = getPosition(currentText);
+          const end = getPosition(currentText + value);
+
+          editor.cm.dispatch({
+            changes: [
+              {
+                from: editor.posToOffset(start),
+                insert: '',
+                to: editor.posToOffset(end),
+              },
+            ],
+            filter: false,
+          });
+        } else {
+          currentText += value;
+        }
+      }
     }
   }
 
