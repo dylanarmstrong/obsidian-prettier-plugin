@@ -38,7 +38,8 @@ const fromOffset = (offset: number, text: string): EditorPosition => {
 
 export default class PrettierPlugin extends Plugin {
   settings: PrettierPluginSettings;
-  originalCallback: () => void | undefined;
+  originalCheckCallback?: (checking: boolean) => boolean | void;
+  originalCallback?: () => void;
 
   private async format() {
     const editor = this.app.workspace.activeEditor?.editor;
@@ -85,9 +86,18 @@ export default class PrettierPlugin extends Plugin {
     }
 
     this.originalCallback = handleSave.callback;
+    this.originalCheckCallback = handleSave.checkCallback;
 
-    handleSave.callback = () => {
-      this.originalCallback?.apply(handleSave);
+    handleSave.checkCallback = (checking: boolean) => {
+      // If checkCallback is defined (i.e. obsidian > 1.9.0)
+      if (this.originalCheckCallback) {
+        this.originalCheckCallback.apply(handleSave, [checking]);
+      } else if (this.originalCallback) {
+        // Otherwise call original callback method.
+        // Note: this won't be called normally if checkCallback is defined
+        this.originalCallback.apply(handleSave);
+      }
+
       this.onFileSave();
     };
   }
@@ -95,14 +105,16 @@ export default class PrettierPlugin extends Plugin {
   private revertSave() {
     const handleSave = this.getSave();
 
-    if (!handleSave || !this.originalCallback) {
+    if (!handleSave || !this.originalCheckCallback) {
       return;
     }
 
-    handleSave.callback = this.originalCallback;
+    handleSave.checkCallback = this.originalCheckCallback;
   }
 
   async onload() {
+    // eslint-disable-next-line no-console
+    console.log('loading prettier-format');
     await this.loadSettings();
 
     this.patchSave();
